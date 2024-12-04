@@ -35,7 +35,7 @@ class NanoIDQueryEventListener(EventListener):
             nanoid = generate(alphabet, size)
             desc="Alphabet: "
             if alphabet_type == "default":
-                desc+="NoLookALikeDigits + NoLookALikeCharacters (Upper / Lower)"
+                desc+="NoLookALike Digits and Chars (Upper / Lower)"
             else:
                 desc+=alphabet
             desc+=", Size: " + str(size)
