@@ -42,7 +42,7 @@ class NanoIDQueryEventListener(EventListener):
             return RenderResultListAction([
                 ExtensionResultItem(
                     name="Error",
-                    desc=f"{e}",
+                    description=f"{e}",
                 )
             ])
 
