@@ -22,7 +22,7 @@ class NanoIDQueryEventListener(EventListener):
                 return
             
             alphabet_type = args[0].lower() if len(args) == 2 else 'default'
-            size = int(args[1] if len(args) > 1 else args[1])
+            size = int(args[1] if len(args) > 1 else args[0])
 
             if alphabet_type == "default":
                 alphabet = "346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz"
