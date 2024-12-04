@@ -19,7 +19,7 @@ class NanoIDQueryEventListener(EventListener):
             size = 12
 
             args = event.get_argument() if event is not None and event.get_argument() is not None else ""
-            args = [] if args is None else args.split(' ')
+            args = [] if args is None else [arg for arg in args.split(' ') if arg]
 
             if len(args) == 2:
                 alphabet_type = args[0]
@@ -32,7 +32,6 @@ class NanoIDQueryEventListener(EventListener):
                     alphabet_type = args[0]
 
             alphabet = alphabet_type if alphabet_type != "default" else "346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz"
-
             nanoid = generate(alphabet, size)
 
             return RenderResultListAction([
