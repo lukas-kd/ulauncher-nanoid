@@ -14,58 +14,47 @@ class NanoIDExtension(Extension):
 
 class NanoIDQueryEventListener(EventListener):
     def on_event(self, event, extension):
-        args = event.get_argument() or ""
-        args = args.split()
-
-        # Parse arguments
-        alphabet_type = args[0].lower() if len(args) > 0 else "readable"
-        size = args[1] if len(args) > 1 else "10"
-
-        # Set default alphabet
-        if alphabet_type == "readable":
-            alphabet = string.ascii_letters + string.digits
-        elif alphabet_type == "custom":
-            # Prompt user to provide custom alphabet
-            return RenderResultListAction([
-                ResultItem(
-                    title="Type your custom alphabet",
-                    subtitle="e.g., abcdef123",
-                    action=None  # No immediate action; wait for user input
-                )
-            ])
-        else:
-            # Invalid alphabet type
-            return RenderResultListAction([
-                ResultItem(
-                    title="Invalid alphabet type",
-                    subtitle="Choose either 'readable' or 'custom'",
-                    action=None
-                )
-            ])
-
-        # Validate size
         try:
-            size = int(size)
-            if size < 2 or size > 12:
-                raise ValueError
-        except ValueError:
+            alphabet_type = 'default'
+            size = 12
+
+            args = event.get_argument() if event is not None and event.get_argument() is not None else ""
+            args = [] if args is None else [arg for arg in args.split(' ') if arg]
+
+            if len(args) == 2:
+                alphabet_type = args[0]
+                size = int(args[1] if args[1].isdigit() else 12)
+            elif len(args) == 1:
+                if args[0].isdigit():
+                    given_size = int(args[0])
+                    size = given_size if given_size > 0 else size
+                else:
+                    alphabet_type = args[0]
+
+            alphabet = alphabet_type if alphabet_type != "default" else "346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz"
+            nanoid = generate(alphabet, size)
+            desc="Alphabet: "
+            if alphabet_type == "default":
+                desc+="NoLookALike Digits and Chars (Upper / Lower)"
+            else:
+                desc+=alphabet
+            desc+=", Size: " + str(size)
             return RenderResultListAction([
-                ResultItem(
-                    title="Invalid size",
-                    subtitle="Enter a number between 2 and 12, or type a larger custom size",
-                    action=None
+                ExtensionResultItem(
+                    icon='images/icon.png',
+                    name=nanoid,
+                    description=desc,
+                    highlightable=False,
+                    on_enter=CopyToClipboardAction(nanoid)
                 )
             ])
-
-        # Generate NanoID
-        nanoid = generate(alphabet, size)
-        return RenderResultListAction([
-            ResultItem(
-                title=f"NanoID: {nanoid}",
-                subtitle="Click to copy to clipboard",
-                action=CopyToClipboardAction(nanoid)
-            )
-        ])
+        except Exception as e:
+            return RenderResultListAction([
+                ExtensionResultItem(
+                    name="Error",
+                    description=f"{e}",
+                )
+            ])
 
 if __name__ == '__main__':
     NanoIDExtension().run()

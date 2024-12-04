@@ -1,46 +1,53 @@
-# Ulauncher UUID
+# Ulauncher NanoID
 
-> [Ulauncher](https://ulauncher.io/) Extension for generating UUID
+Ulauncher Extension for generating NanoID strings.
 
-## Screenshots
-![media1](preview.gif)
+## Features
+
+Generate NanoID with customizable alphabet and length.
+Default NanoID uses a combination of NoLookALikeDigits and NoLookALikeCharacters (upper and lower case).
+Single argument: Specify length of the NanoID.
+Two arguments: Specify alphabet and length of the NanoID.
+Screenshots
 
 ## Requirements
 
-* [ulauncher](https://ulauncher.io/)
+* ulauncher
 * Python >= 2.7
-* uuid (`pip install uuid`) and (`pip install uuid7`)
+* nanoid (`pip install nanoid`)
+
+## Preview
+
+![Preview](preview.gif)
 
 ## Install
 
-Open ulauncher preferences window -> extensions -> add extension and paste the following url:
+Open Ulauncher preferences window -> Extensions -> Add Extension and paste the following URL:
 
-```https://github.com/fsevenm/ulauncher-uuid```
- 
+[ulauncher-nanoid](https://github.com/lukas-kd/ulauncher-nanoid)
 
 ## Development
 
-```shell script
-git clone https://github.com/fsevenm/ulauncher-uuid
-ln -s <clone_location> ~/.local/share/ulauncher/extensions/ulauncher-uuid
+```shell
+git clone https://github.com/lukas-kd/ulauncher-nanoid
+cd ulauncher-nanoid
+python -m venv .venv
+pip install -r requirements.txt
+ln -s ./ ~/.local/share/ulauncher/extensions/ulauncher-nanoid
 ```
 
-To start debugging the extension, run these debugging script:
-```shell script
-# run in different Terminal tab
+To start debugging the extension, run the following debugging scripts in separate terminal tabs:
+
+```shell
+# Terminal 1: Run Ulauncher in development mode
 ulauncher --no-extensions --dev -v
-# run in different Terminal tab, you need to change PYTHONPATH value based on your local python config, change the USERNAME to yours
-VERBOSE=1 ULAUNCHER_WS_API=ws://127.0.0.1:5054/ulauncher-uuid PYTHONPATH=/usr/lib/python3/dist-packages /usr/bin/python3 /home/USERNAME/.local/share/ulauncher/extensions/ulauncher-uuid/main.py
+
+# Terminal 2: Run your extension (Update PYTHONPATH and USERNAME to match your local setup)
+VERBOSE=1 ULAUNCHER_WS_API=ws://127.0.0.1:5054/ulauncher-nanoid PYTHONPATH=/usr/lib/python3/dist-packages /usr/bin/python3 /home/USERNAME/.local/share/ulauncher/extensions/ulauncher-nanoid/main.py
 ```
 
-When you made any changes to `main.py` or the other assets, you need to re-run debugging scripts above.
+When you make any changes to [main.py](main.py) or other assets, re-run the debugging scripts above.
 
-## Todos
-- [x] Add gif preview (or screenshot)
-- [ ] Add more namespaces for uuid v3 and v5
-- [x] Optimize gif preview to smaller size
-- [ ] Add different icon for each uuid version 
+## License
 
-## License 
-
-MIT @ Ayub Aswad
+MIT
