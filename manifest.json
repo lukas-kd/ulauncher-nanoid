@@ -1,0 +1,18 @@
+{
+    "required_api_version": "^2.0.0",
+    "name": "NanoID",
+    "description": "Generate customizable NanoIDs",
+    "developer_name": "lukas-kd",
+    "icon": "images/icon.png",
+    "options": {
+        "query_debounce": 0.05
+    },
+    "preferences": [
+        {
+            "id": "nanoid_kw",
+            "type": "keyword",
+            "name": "Trigger Keyword",
+            "default_value": "nanoid"
+        }
+    ]
+}
