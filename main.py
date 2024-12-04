@@ -27,7 +27,7 @@ class NanoIDQueryEventListener(EventListener):
         elif alphabet_type == "custom":
             # Prompt user to provide custom alphabet
             return RenderResultListAction([
-                ResultItem(
+                ExtensionResultItem(
                     title="Type your custom alphabet",
                     subtitle="e.g., abcdef123",
                     action=None  # No immediate action; wait for user input
@@ -36,7 +36,7 @@ class NanoIDQueryEventListener(EventListener):
         else:
             # Invalid alphabet type
             return RenderResultListAction([
-                ResultItem(
+                ExtensionResultItem(
                     title="Invalid alphabet type",
                     subtitle="Choose either 'readable' or 'custom'",
                     action=None
@@ -50,7 +50,7 @@ class NanoIDQueryEventListener(EventListener):
                 raise ValueError
         except ValueError:
             return RenderResultListAction([
-                ResultItem(
+                ExtensionResultItem(
                     title="Invalid size",
                     subtitle="Enter a number between 2 and 12, or type a larger custom size",
                     action=None
@@ -60,7 +60,7 @@ class NanoIDQueryEventListener(EventListener):
         # Generate NanoID
         nanoid = generate(alphabet, size)
         return RenderResultListAction([
-            ResultItem(
+            ExtensionResultItem(
                 title=f"NanoID: {nanoid}",
                 subtitle="Click to copy to clipboard",
                 action=CopyToClipboardAction(nanoid)
