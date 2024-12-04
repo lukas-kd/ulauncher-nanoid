@@ -38,7 +38,7 @@ class NanoIDQueryEventListener(EventListener):
                 desc+="NoLookALikeDigits + NoLookALikeCharacters (Upper / Lower)"
             else:
                 desc+=alphabet
-            desc+=", Size: " + size
+            desc+=", Size: " + str(size)
             return RenderResultListAction([
                 ExtensionResultItem(
                     icon='images/icon.png',
