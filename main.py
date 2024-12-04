@@ -15,12 +15,11 @@ class NanoIDExtension(Extension):
 class NanoIDQueryEventListener(EventListener):
     def on_event(self, event, extension):
         try:
-            args = []
-            args = event.get_argument() if event is not None and event.get_argument() != "" else ""
-            args = args.split(' ')
-            
             alphabet_type = 'default'
             size = 12
+
+            args = event.get_argument() if event is not None and event.get_argument() is not None else ""
+            args = [] if args is None else args.split(' ')
 
             if len(args) == 2:
                 alphabet_type = args[0]
