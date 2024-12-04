@@ -17,19 +17,23 @@ class NanoIDQueryEventListener(EventListener):
         try:
             args = event.get_argument() or ""
             args = args.split(' ')
-
-            if len(args) < 1 or args[0].isdigit() == False:
-                return
             
-            alphabet_type = args[0].lower() if len(args) == 2 else 'default'
-            size = int(args[1] if len(args) > 1 else args[0])
+            alphabet_type = 'default'
+            size = 12
 
-            if alphabet_type == "default":
-                alphabet = "346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz"
-            else:
-                alphabet = alphabet_type
+            if len(args) == 2:
+                alphabet_type = args[0]
+                size = int(args[1] if args[1].isdigit() else 12)
+            elif len(args) == 1:
+                if args[0].isdigit():
+                    size = int(args[0])
+                else:
+                    alphabet_type = args[0]
+
+            alphabet = alphabet_type if alphabet_type != "default" else "346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz"
 
             nanoid = generate(alphabet, size)
+            
             return RenderResultListAction([
                 ExtensionResultItem(
                     icon='images/icon.png',
