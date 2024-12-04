@@ -32,16 +32,17 @@ class NanoIDQueryEventListener(EventListener):
             nanoid = generate(alphabet, size)
             return RenderResultListAction([
                 ExtensionResultItem(
-                    title=f"NanoID: {nanoid}",
-                    subtitle="Click to copy to clipboard",
-                    action=CopyToClipboardAction(nanoid)
+                    icon='images/icon.png',
+                    name=nanoid,
+                    highlightable=False,
+                    on_enter=CopyToClipboardAction(nanoid)
                 )
             ])
         except Exception as e:
             return RenderResultListAction([
                 ExtensionResultItem(
-                    title=f"Error: {e}",
-                    subtitle=f"Error: {e}",
+                    name="Error",
+                    desc=f"{e}",
                 )
             ])
 
