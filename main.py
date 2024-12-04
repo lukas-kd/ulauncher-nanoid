@@ -33,11 +33,17 @@ class NanoIDQueryEventListener(EventListener):
 
             alphabet = alphabet_type if alphabet_type != "default" else "346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz"
             nanoid = generate(alphabet, size)
-
+            desc="Alphabet: "
+            if alphabet_type == "default":
+                desc+="NoLookALikeDigits + NoLookALikeCharacters (Upper / Lower)"
+            else:
+                desc+=alphabet
+            desc+=", Size: " + size
             return RenderResultListAction([
                 ExtensionResultItem(
                     icon='images/icon.png',
                     name=nanoid,
+                    description=desc,
                     highlightable=False,
                     on_enter=CopyToClipboardAction(nanoid)
                 )
