@@ -5,7 +5,10 @@
     "developer_name": "lukas-kd",
     "icon": "images/icon.png",
     "options": {
-        "query_debounce": 0.05
+        "query_debounce": 0.05,
+        "query": {
+            "keyword": "nanoid"
+        }
     },
     "preferences": [
         {

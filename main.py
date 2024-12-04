@@ -26,14 +26,15 @@ class NanoIDQueryEventListener(EventListener):
                 size = int(args[1] if args[1].isdigit() else 12)
             elif len(args) == 1:
                 if args[0].isdigit():
-                    size = int(args[0])
+                    given_size = int(args[0])
+                    size = given_size if given_size > 0 else size
                 else:
                     alphabet_type = args[0]
 
             alphabet = alphabet_type if alphabet_type != "default" else "346789ABCDEFGHJKLMNPQRTUVWXYabcdefghijkmnpqrtwxyz"
 
             nanoid = generate(alphabet, size)
-            
+
             return RenderResultListAction([
                 ExtensionResultItem(
                     icon='images/icon.png',
