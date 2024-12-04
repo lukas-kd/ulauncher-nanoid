@@ -14,7 +14,7 @@
         {
             "id": "nanoid_kw",
             "type": "keyword",
-            "name": "Trigger Keyword",
+            "name": "NanoID",
             "default_value": "nanoid"
         }
     ]

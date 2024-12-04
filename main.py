@@ -15,7 +15,8 @@ class NanoIDExtension(Extension):
 class NanoIDQueryEventListener(EventListener):
     def on_event(self, event, extension):
         try:
-            args = event.get_argument() or ""
+            args = []
+            args = event.get_argument() if event is not None and event.get_argument() != "" else ""
             args = args.split(' ')
             
             alphabet_type = 'default'
